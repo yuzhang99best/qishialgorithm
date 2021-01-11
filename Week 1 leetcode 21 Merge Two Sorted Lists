@@ -1,0 +1,27 @@
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+class Solution:
+    temp=[]
+    def CreateListNode(self, l:list) -> ListNode:
+        if len(l)==1:
+            return ListNode(l[0],None)
+        if len(l)>1:
+            return ListNode(l[0],self.CreateListNode(l[1:]))
+    def ConvertToList(self, ln:ListNode):
+        self.temp.append(ln.val)
+        if ln.next is not None:
+            return self.ConvertToList(ln.next)
+        else:
+            return self.temp    
+    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+        if l1 is None:
+            return l2
+        elif l2 is None:
+            return l1
+        else:
+            if l1.val>l2.val:
+                return ListNode(l2.val,self.mergeTwoLists(l1,l2.next))
+            else:
+                return ListNode(l1.val,self.mergeTwoLists(l1.next,l2))
