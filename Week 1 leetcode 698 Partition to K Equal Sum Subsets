@@ -1,0 +1,26 @@
+class Solution:
+    def canPartitionKSubsets(self, nums, k):    
+        if len(nums) < k:
+            return False
+        num_sum = sum(nums)
+        nums.sort(reverse=True)
+        if num_sum % k != 0:
+            return False
+        sub_sum = [num_sum / k] * k
+
+        def get_subsum(i):
+            print("i is %i" %i)
+            if i == len(nums): 
+                return True
+            for j in range(k):
+                if sub_sum[j] >= nums[i]:
+                    print(sub_sum)
+                    print("The current element is", nums[i])
+                    sub_sum[j] = sub_sum[j] - nums[i]
+                    if get_subsum(i+1):
+                        return True
+                    sub_sum[j] = sub_sum[j] + nums[i]
+            return False
+        return get_subsum(0)
+        
+Solution().canPartitionKSubsets([4, 3, 2, 3, 5, 2, 1], 4)
