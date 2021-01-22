@@ -1,0 +1,12 @@
+class Solution:
+    def maxProduct(self, nums):
+        Max = [nums[0]] 
+        Min = [nums[0]]
+        for n, item in enumerate(nums[1:]):
+            if item >= 0:
+                Max.append(max(item, Max[n] * item))
+                Min.append(min(item, Min[n] * item))               
+            else:
+                Max.append(max(item, Min[n] * item))
+                Min.append(min(item, Max[n] * item))        
+        return max(Max)
