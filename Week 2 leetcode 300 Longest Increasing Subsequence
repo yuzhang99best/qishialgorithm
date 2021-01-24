@@ -1,0 +1,16 @@
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        current_LIS = [0] * len(nums)
+        size = 0
+        for item in nums:
+            left = 0
+            right = size
+            while left != right:
+                middle = left + (right - left) // 2
+                if current_LIS[middle] < item:
+                    left = middle + 1
+                else:
+                    right = middle                
+            current_LIS[left] = item
+            size = max(size, left + 1)
+        return size
