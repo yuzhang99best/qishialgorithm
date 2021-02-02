@@ -1,0 +1,21 @@
+class Solution:
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        n = len(matrix)
+        low = matrix[0][0]
+        high = matrix[-1][-1]
+        while low <= high:
+            middle = (low + high) // 2
+            row = 0
+            col = n-1
+            count = 0
+            while row < n and col >= 0:
+                if matrix[row][col] < middle:
+                    count = count + col + 1
+                    row = row + 1
+                else:
+                    col = col - 1
+            if count >= k:
+                high = middle - 1
+            else:
+                low = middle + 1
+        return high
