@@ -1,0 +1,16 @@
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:    
+    def isValidBST(self, root: TreeNode, lowerbound=float('-inf'), upperbound=float('inf')) -> bool:
+        if root is None:
+            return True
+        else:
+            if root.val<=lowerbound or root.val>=upperbound:
+                return False
+            else:
+                return self.isValidBST(root.left, lowerbound, root.val) and self.isValidBST(root.right, root.val, upperbound)
