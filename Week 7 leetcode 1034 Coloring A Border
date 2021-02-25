@@ -1,0 +1,16 @@
+class Solution:
+    def colorBorder(self, grid: List[List[int]], r0: int, c0: int, color: int) -> List[List[int]]:
+        visited=[]
+        row=len(grid)
+        col=len(grid[0])
+        def helper(i,j):
+            if [i,j] in visited:
+                return True
+            if not (0<=i<row and 0<=j<col and grid[i][j]==grid[r0][c0]):
+                return False
+            visited.append([i,j])
+            if helper(i+1,j)+helper(i-1,j)+helper(i,j+1)+helper(i,j-1)<4:
+                grid[i][j]=color
+            return True
+        helper(r0,c0)
+        return grid
